@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Style Transfer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: #333;
+            text-align:center;
+        }
+        .flex {
+            display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-around;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            color: #555;
+        }
+        input[type="file"] {
+            display: block;
+            margin: 0 auto 10px auto;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+            text-align: center;
+        }
+        #styled-image {
+            margin-top: 10px;
+            max-width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Style Transfer</h1>
+    <div class="flex">
+    <div style="margin-top:2rem;">
+        <form id="upload-form" enctype="multipart/form-data" method="post">
+            <label for="content-image">Content Image:</label>
+            <input type="file" id="content-image" name="content_image" accept="image/*" required>
+            <br>
+            <label for="style-image">Style Image:</label>
+            <input type="file" id="style-image" name="style_image" accept="image/*" required>
+            <br>
+            <button type="submit">Generate Styled Image</button>
+        </form>
+        <br>
+    </div>
+    <div id="result">
+        <h2>Styled Image:</h2>
+        <img id="styled-image" src="" alt="Styled Image" style="display: none;">
+    </div>
+</div>
+    <script>
+        document.getElementById('upload-form').onsubmit = async function(event) {
+            event.preventDefault();
+            const formData = new FormData();
+            formData.append('content_image', document.getElementById('content-image').files[0]);
+            formData.append('style_image', document.getElementById('style-image').files[0]);
+
+            const response = await fetch('/upload', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                const blob = await response.blob();
+                const url = URL.createObjectURL(blob);
+                const img = document.getElementById('styled-image');
+                img.src = url;
+                img.style.display = 'block';
+            } else {
+                alert('Failed to generate styled image');
+            }
+        };
+    </script>
+</body>
+</html>
+
