@@ -20,13 +20,13 @@ This project is a web application built with Flask for performing image style tr
 ## Installation
 
 1. Clone the repository:
-~git clone https://github.com/yourusername/image-style-transfer.git~
+`git clone https://github.com/yourusername/image-style-transfer.git`
 
 2. Navigate to the project directory:
-~cd Images-Blender~
+`cd Images-Blender`
 
 3. Install the required dependencies:
-~pip install -r requirements.txt~
+`pip install -r requirements.txt`
 
 4. Run the Flask application:
-~python app.py~
+`python app.py`
