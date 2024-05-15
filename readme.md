@@ -1,6 +1,6 @@
 # Image Style Transfer Web App
 
-This project is a web application built with Flask for performing image style transfer using a pre-trained model from TensorFlow Hub. Users can upload a content image and a style image, and the application will generate a stylized image that merges the styles of both images.
+A web application built with Flask for performing image style transfer using a pre-trained model from TensorFlow Hub. Users can upload a content image and a style image, and the application will generate a stylized image that merges the styles of both images.
 
 ## Features
 
